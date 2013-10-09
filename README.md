@@ -41,7 +41,8 @@ config.middleware.use(Rack::LiveReload,
   :max_delay        => 10_000, # default 60_000
   :live_reload_port => 56789,  # default 35729
   :host             => 'myhost.cool.wow',
-  :ignore           => [ %r{dont/modify\.html$} ]
+  :ignore           => [ %r{dont/modify\.html$} ],
+  :animate          => true    # animate change transition
 )
 ```
 

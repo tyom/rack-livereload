@@ -97,14 +97,21 @@ module Rack
         if use_vendored?
           src = "#{app_root}#{LIVERELOAD_JS_PATH.dup}?host=#{host_to_use}"
         else
-          src = livereload_local_uri.dup.gsub('localhost', host_to_use) + '?'
+          src = livereload_local_uri.dup.gsub('localhost', host_to_use)
         end
 
-        src << "&amp;mindelay=#{@options[:min_delay]}" if @options[:min_delay]
-        src << "&amp;maxdelay=#{@options[:max_delay]}" if @options[:max_delay]
-        src << "&amp;port=#{@options[:port]}" if @options[:port]
+        src << "#{param_sep src}mindelay=#{@options[:min_delay]}" if @options[:min_delay]
+        src << "#{param_sep src}maxdelay=#{@options[:max_delay]}" if @options[:max_delay]
+        src << "#{param_sep src}animate=#{@options[:animate]}" if @options[:animate]
+        src << "#{param_sep src}port=#{@options[:port]}" if @options[:port]
 
         src
+      end
+
+      private
+
+      def param_sep url
+        url[/\?/] ? '&amp;' : '?'
       end
     end
   end
