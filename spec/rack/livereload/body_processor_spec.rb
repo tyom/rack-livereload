@@ -155,17 +155,19 @@ describe Rack::LiveReload::BodyProcessor do
     end
 
     context 'set options' do
-      let(:options) { { :host => new_host, :port => port, :min_delay => min_delay, :max_delay => max_delay } }
+      let(:options) { { :host => new_host, :port => port, :min_delay => min_delay, :max_delay => max_delay, :animate => animate } }
       let(:min_delay) { 5 }
       let(:max_delay) { 10 }
       let(:port) { 23 }
       let(:new_host) { 'myhost' }
+      let(:animate) { true }
 
       it 'should add the livereload.js script tag' do
         processed_body.should include("mindelay=#{min_delay}")
         processed_body.should include("maxdelay=#{max_delay}")
         processed_body.should include("port=#{port}")
         processed_body.should include("host=#{new_host}")
+        processed_body.should include("animate=#{animate}")
       end
     end
 
